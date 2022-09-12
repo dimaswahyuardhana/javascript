@@ -1,0 +1,64 @@
+<script language="javascript">
+    var nama_pegawai = "Ridwan";
+    var jabatan = "manager";
+    var status = "menikah";
+
+    if(jabatan == 'manager'){
+        gapok = 15000000;
+    }
+    else if(jabatan == 'asisten manager'){
+        gapok = 10000000;
+    }
+    else if(jabatan == 'staff'){
+        gapok = 5000000;
+    }
+    else{
+        gapok = 0;
+    }
+    let gapok_pegawai = gapok;
+    let tunj_jabatan = 0.15 * gapok;
+    let tunj_bpjs = 0.1 * gapok;
+    let tunj_keluarga = (status == 'menikah') ? 0.2 * gapok : 0;
+    let tot_gaji = gapok_pegawai + tunj_jabatan + tunj_bpjs + tunj_keluarga;
+
+    document.write("Data Pegawai" + 
+        "<br>Nama Pegawai : " + nama_pegawai +
+        "<br>Jabatan : " + jabatan +
+        "<br>Status : " + status +
+        "<table border='1'" +
+            "<thead>" +
+                "<tr>" +
+                    "<th>Gaji & Tunjangan</th>" +
+                    "<th>Nominal</th>" +
+                "</tr>" +
+            "</thead>" +
+            "<tbody>" +
+                "<tr>" +
+                    "<td>Gaji Pokok</td>" +
+                    "<td>" + gapok + "</td>" +
+                "</tr>" +
+
+                "<tr>" +
+                    "<td>Tunjangan Jabatan</td>" +
+                    "<td>" + tunj_jabatan + "</td>" +
+                "</tr>" +
+
+                "<tr>" +
+                    "<td>Tunjangan BPJS</td>" +
+                    "<td>" + tunj_bpjs + "</td>" +
+                "</tr>" +
+
+                "<tr>" +
+                    "<td>Tunjangan Keluarga</td>" +
+                    "<td>" + tunj_keluarga + "</td>" +
+                "</tr>" +
+            "</tbody>" +
+            "<tfoot>" +
+                "<tr>" +
+                    "<th>Total Gaji</th>" +
+                    "<th>" + tot_gaji + "</th>" +
+                "</tr>" +
+            "</tfoot>" +
+        "</table>"
+    );
+</script>
