@@ -1,0 +1,72 @@
+<h3 align="center">DAFTAR PEGAWAI</h3>
+<table align="center" cellpadding="10" cellspacing="1" border="1">
+    <thead>
+        <tr bgcolor="#FFD8A9" height="20">
+            <th width="5">NO</th>
+            <th width="25">NAMA</th>
+            <th width="40">JABATAN</th>
+            <th width="60">AGAMA</th>
+            <th width="90">GAJI POKOK</th>
+            <th width="150">TUNJANGAN JABATAN</th>
+            <th width="200">TUNJANGAN KESEHATAN</th>
+            <th width="95">GAJI KOTOR</th>
+            <th width="100">ZAKAT PROFESI</th>
+            <th width="120">TAKE HOME PAY</th>
+        </tr>
+    </thead>
+    <tbody>
+        <script language="javascript">
+            var no;
+            var warna;
+            var agama;
+            var gapok;
+            var tunj_jab;
+            var tunj_kes;
+            var gaji_kotor;
+            var zakat_profesi;
+            var take_home;
+
+            for(no = 1; no <= 100; no++){
+                warna = (no % 2 == 0) ? 'blue' : 'yellow';
+                agama = (no % 2 == 0) ? 'Non Muslim' : 'Muslim';
+
+                if(no <= 25 ) jabatan = 'manager';
+                else if(no >= 26 && no <= 50) jabatan = 'asisten manager';
+                else if(no >= 51 && no <= 75) jabatan = 'supervisor';
+                else if(no >= 76 && no <= 100) jabatan = 'staff';
+
+                switch(jabatan){
+                    case 'manager' : gapok = 15000000; break;
+                    case ' asisten manager' : gapok = 10000000; break;
+                    case 'supervisor' : gapok = 7000000; break;
+                    case 'staff' : gapok = 5000000; break;
+                }
+
+                tunj_jab = 0.2 * gapok;
+                tunj_kes = 0.1 * gapok;
+                gaji_kotor = gapok + tunj_jab + tunj_kes;
+
+                zakat_profesi = (agama == 'muslim' && gaji_kotor >= 7000000) ? 0.025 * gaji_kotor : 0;
+
+                take_home = gaji_kotor - zakat_profesi;
+
+                document.write(`
+                    <tbody>
+                        <tr bg color = '${warna}' height='20' align='center'>
+                            <td>${no}</td>
+                            <td>pegawai ${no}</td>
+                            <td>${jabatan}</td>
+                            <td>${agama}</td>
+                            <td>${gapok}</td>
+                            <td>${tunj_jab}</td>
+                            <td>${tunj_kes}</td>
+                            <td>${gaji_kotor}</td>
+                            <td>${zakat_profesi}</td>
+                            <td>${take_home}</td>
+                        </tr>
+                    </tbody>
+                `);
+            }
+        </script>
+    </tbody>
+</table>
