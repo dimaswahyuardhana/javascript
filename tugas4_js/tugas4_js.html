@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="card">
+        <div class="card-header">
+            Pembelian Barang dengan Konversi Kurs
+        </div>
+        <div class="card-body">
+            <form id="frm">
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label">Nama Pembeli</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" name="nama">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label">Nama Barang</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" name="barang">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label">Harga Barang</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" name="harga">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label">Jumlah Barang</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" name="jumlah">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label">Valuta Asing</label>
+                    <div class="col-sm-10">
+                        <select name="valas" id="valas" class="form-control">
+                            <option value="">-- Pilih Valas --</option>
+                            <option value="USD">-- USD --</option>
+                            <option value="SGD">-- SGD --</option>
+                            <option value="EUR">-- EUR --</option>
+                        </select>
+                    </div>    
+            </form>
+        </div>
+    </div>  
+    <div class="alert alert-primary" role="alert" id="isi">
+    Data pembelian: 
+    <br/>Nama pembeli: <span id="out_nama_pembeli"></span>
+    <br/>Nama barang: <span id="out_nama_barang"></span>
+    <br/>Harga barang: <span id="out_harga_barang"></span>
+    <br/>Jumlah barang: <span id="out_jumlah_barang"></span>
+    <br/>Valuta Asing: <span id="out_valuta_asing"></span>
+    <br/>Total bayar: <span id="out_total_bayar"></span>
+    </div>
+    </body> 
+<script>
+/*
+Hitunglah pembelian barang berdasarkan kurs valas yang dipilih.
+(Event Handle Js nya: onchange ketika pilih valas)
+Hasilnya ditempatkan pada paragraf yang ber-id-kan isi
+*/
+
+let frmE = document.getElementById('frm')
+let valasE = document.querySelector("#valas")
+let outNamaPembeliE = document.querySelector("#out_nama_pembeli")
+let outNamaBarangE = document.querySelector("#out_nama_barang")
+let outHargaBarangE = document.querySelector("#out_harga_barang")
+let outJumlahBarangE = document.querySelector("#out_jumlah_barang")
+let outValutaAsingE = document.querySelector("#out_valuta_asing")
+let outTotalBayarE = document.querySelector("#out_total_bayar")
+
+valasE.addEventListener("change", konversiKurs)
+valasE.addEventListener("change", konversiKurs)
+
+function konversiKurs(e){
+    
+    e.preventDefault();
+    // e.stopPropagation();
+
+    let pembeli = document.getElementById('frm').nama.value;
+    let barang = document.getElementById('frm').barang.value;
+    let harga = parseInt(document.getElementById('frm').harga.value);
+    let jumlah = parseInt(document.getElementById('frm').jumlah.value);
+    let uang_asing = document.getElementById('frm').valas.value;
+
+    let total = 0;
+    if(uang_asing == "USD"){
+        total = (harga * jumlah) / 14917;
+    }
+    else if(uang_asing == "SGD"){
+        total = (harga * jumlah) / 10590;
+    }
+    else if(uang_asing == "EUR"){
+        total = (harga * jumlah) / 14918;
+    }
+
+    // let output = document.write(`
+    //     <br>Nama Pembeli : ${pembeli}
+    //     <br>Nama Barang : ${barang}
+    //     <br>Harga Barang : ${harga}
+    //     <br>Jumlah Barang : ${jumlah}
+    //     <br>Valuta Asing : ${uang_asing}
+    //     <br>Total : ${total}
+    // `)
+
+    outNamaPembeliE.textContent = pembeli
+    outNamaBarangE.textContent = barang
+    outHargaBarangE.textContent = harga
+    outJumlahBarangE.textContent = jumlah
+    outValutaAsingE.textContent = uang_asing
+    outTotalBayarE.textContent = total
+ 
+    let kosong = "Silahkan anda isi data terlebih dahulu"
+    let cetak = (pembeli && barang && harga && jumlah && uang_asing != '') ? output : kosong;
+    document.getElementById('isi').innerHTML = output;
+}
+</script>    
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+  
+</html>
